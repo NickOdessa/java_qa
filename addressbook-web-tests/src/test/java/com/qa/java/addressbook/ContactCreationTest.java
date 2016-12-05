@@ -33,7 +33,7 @@ public class ContactCreationTest {
     @Test
     public void testContactCreation() {
         initContactCreation();
-        fillContactForm(new ContactData("Nick", "Petrov", "Nick1", "Roga and Kopyta", "Odessa, Ukraine", "+380487777777", "nick_test@mailinator.com"));
+        fillContactForm(new ContactData("Nick22", "Petrov1", "Nick12", "Roga and Kopyta", "Odessa, Ukraine", "+380487777777", "nick_test@mailinator.com"));
         submitContactCreation();
         returnToHomePage();
     }
