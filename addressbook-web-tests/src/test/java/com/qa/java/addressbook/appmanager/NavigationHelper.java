@@ -6,14 +6,15 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 /**
  * Created by user on 07.12.2016.
  */
-public class NavigationHelper extends HelperBase{
+public class NavigationHelper extends HelperBase {
 
   public NavigationHelper(FirefoxDriver wd) {
     super(wd);
 
   }
+
   public void returnToHomePage() {
-   click(By.linkText("home page"));
+    click(By.linkText("home page"));
   }
 
   public void gotoGroupPage() {
