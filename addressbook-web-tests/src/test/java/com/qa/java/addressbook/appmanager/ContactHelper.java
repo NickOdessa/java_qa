@@ -14,9 +14,6 @@ public class ContactHelper {
     this.wd = wd;
   }
 
-  public void returnToHomePage() {
-    wd.findElement(By.linkText("home page")).click();
-  }
 
   public void submitContactCreation() {
     wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
