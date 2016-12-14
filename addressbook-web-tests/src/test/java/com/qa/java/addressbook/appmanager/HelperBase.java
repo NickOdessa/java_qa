@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
  * Created by user on 08.12.2016.
@@ -21,10 +20,21 @@ public class HelperBase {
     wd.findElement(locator).click();
   }
 
+  protected void findElement(By locator){
+
+    wd.findElement(locator);
+  }
+
   protected void type(By locator, String text) {
-    click(locator);
-    wd.findElement(locator).clear();
-    wd.findElement(locator).sendKeys(text);
+    WebElement element = wd.findElement(locator);
+    if (text !=null) {
+     element.clear();
+      element.sendKeys(text);
+    }
+  }
+
+  public void switchWindow(){
+    wd.switchTo().alert().accept();
   }
 
   public boolean isAlertPresent() {

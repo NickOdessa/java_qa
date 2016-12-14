@@ -23,6 +23,6 @@ public class NavigationHelper extends HelperBase {
     click(By.linkText("groups"));
   }
   public void changeActiveWindow(){
-    wd.switchTo().alert().accept();
+    switchWindow();
   }
 }
