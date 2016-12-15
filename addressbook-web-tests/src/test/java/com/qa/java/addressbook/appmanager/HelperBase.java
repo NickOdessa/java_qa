@@ -27,11 +27,14 @@ public class HelperBase {
 
   protected void type(By locator, String text) {
     WebElement element = wd.findElement(locator);
-    if (text !=null) {
-     element.clear();
-      element.sendKeys(text);
-    }
-  }
+    /*if (text !=null) {
+      String existingText = element.getAttribute("value"); //проверяем заполнена ли строка текстом
+      if (! text.equals(existingText)) {*/
+        element.clear();
+        element.sendKeys(text);
+      }
+    //}
+  //}
 
   public void switchWindow(){
     wd.switchTo().alert().accept();
