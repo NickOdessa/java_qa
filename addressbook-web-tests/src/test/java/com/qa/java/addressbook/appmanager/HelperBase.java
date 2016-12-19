@@ -1,15 +1,12 @@
 package com.qa.java.addressbook.appmanager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 /**
  * Created by user on 08.12.2016.
  */
 public class HelperBase {
-  protected WebDriver wd;
+  private WebDriver wd;
 
   public HelperBase(WebDriver wd) {
     this.wd = wd;
@@ -20,23 +17,24 @@ public class HelperBase {
     wd.findElement(locator).click();
   }
 
-  protected void findElement(By locator){
-
-    wd.findElement(locator);
+  protected WebElement findElement(By locator){
+    WebElement element = wd.findElement(locator);
+    return element;
   }
 
   protected void type(By locator, String text) {
-    WebElement element = wd.findElement(locator);
-    /*if (text !=null) {
-      String existingText = element.getAttribute("value"); //проверяем заполнена ли строка текстом
-      if (! text.equals(existingText)) {*/
-        element.clear();
-        element.sendKeys(text);
+    if (text !=null) {
+      String existingText = findElement(locator).getAttribute("value"); //извлекаем из поля содержимое
+      if (! text.equals(existingText))
+    {
+        findElement(locator).clear();
+        findElement(locator).sendKeys(text);
       }
-    //}
-  //}
+    }
+  }
 
   public void switchWindow(){
+
     wd.switchTo().alert().accept();
   }
 
@@ -46,6 +44,15 @@ public class HelperBase {
       return true;
     } catch (NoAlertPresentException e) {
       return false;
+    }
+  }
+
+  protected boolean isElementPresent(By locator) {
+    try {
+      findElement(locator);
+      return true;
+    } catch (NoSuchElementException ex){
+    return false;
     }
   }
 }
