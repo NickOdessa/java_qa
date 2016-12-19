@@ -13,7 +13,6 @@ public class NavigationHelper extends HelperBase {
     super(wd);
 
   }
-
   public void returnToHomePage() {
 
     if (isElementPresent(By.id("maintable"))){
