@@ -5,6 +5,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.lang.annotation.Target;
+import java.util.HashSet;
+import java.util.List;
 
 /**
  * Created by user on 11.12.2016.
@@ -14,16 +16,21 @@ public class GroupModificationTest extends TestBase{
   @Test
   public void testGroupModification() {
     app.getNavigationHelper().gotoGroupPage();
-    int  before = app.getGroupHelper().getGroupCount();
-    if (! app.getGroupHelper().isThereAGroup()){ //проверяем есть ли группа, если нет, то создаем ее
+        if (! app.getGroupHelper().isThereAGroup()){ //проверяем есть ли группа, если нет, то создаем ее
       app.getGroupHelper().creatGroup(new GroupData("test23", null, null));
     }
-    app.getGroupHelper().selectGroup(before -1);
+    List<GroupData> before = app.getGroupHelper().getGroupList();
+    app.getGroupHelper().selectGroup(before.size() -1);
     app.getGroupHelper().initGroupModofication();
-    app.getGroupHelper().fillGroupForm(new GroupData("test43", "test3", null));
+    GroupData group = new GroupData("test43", "test3", null);
+    app.getGroupHelper().fillGroupForm(group);
     app.getGroupHelper().submitGroupModification();
     app.getGroupHelper().returnToGroupPage();
-    int  after = app.getGroupHelper().getGroupCount();
-    Assert.assertEquals(after,before);
+    List<GroupData> after = app.getGroupHelper().getGroupList();
+    Assert.assertEquals(after.size(),before.size());
+
+    before.remove(before.size() -1);
+    before.add(group);
+    Assert.assertEquals(new HashSet<Object>(before),new HashSet<Object>(after));
   }
 }

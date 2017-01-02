@@ -89,7 +89,7 @@ public class ContactHelper extends HelperBase {
 
   public List<ContactData> getContactList() {
     List<ContactData> contacts = new ArrayList<ContactData>();
-    List<WebElement> elements = findElements(By.cssSelector("tr.entry"));
+    List<WebElement> elements = findElements(By.xpath("//img[@alt='Edit']"));
     for (WebElement element : elements ){
       String name = element.getText(); // Пробегаем по каждому элементу списка и получаем имя контакта
       ContactData contact = new ContactData(name, null, null, null, null, null, null, null );
