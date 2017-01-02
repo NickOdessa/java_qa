@@ -3,7 +3,9 @@ package com.qa.java.addressbook.appmanager;
 import com.qa.java.addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 /**
  * Created by user on 07.12.2016.
@@ -61,5 +63,9 @@ public class GroupHelper extends HelperBase {
 
   public boolean isThereAGroup() {
     return isElementPresent(By.name("selected[]"));
+  }
+
+  public int getGroupCount() {
+   return findElements(By.name("selected[]")).size();
   }
 }

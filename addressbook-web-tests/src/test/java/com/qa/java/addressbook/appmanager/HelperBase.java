@@ -2,6 +2,8 @@ package com.qa.java.addressbook.appmanager;
 
 import org.openqa.selenium.*;
 
+import java.util.List;
+
 /**
  * Created by user on 08.12.2016.
  */
@@ -19,6 +21,11 @@ public class HelperBase {
 
   protected WebElement findElement(By locator){
     WebElement element = wd.findElement(locator);
+    return element;
+  }
+
+  protected List<WebElement> findElements(By locator){
+    List<WebElement> element = wd.findElements(locator);
     return element;
   }
 
