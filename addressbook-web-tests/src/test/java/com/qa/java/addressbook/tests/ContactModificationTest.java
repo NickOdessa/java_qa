@@ -15,7 +15,7 @@ public class ContactModificationTest extends TestBase {
     if (! app.getContactHelper().isThereAContact()){ //проверяем есть ли контакт, если нет, то создаем его
       app.getContactHelper().createContact(new ContactData("Nick22", "Petrov1", "Nick12", "test23", "Own Company", "Odessa, Ukraine", "+380487777777", "nick_test@mailinator.com"), true);
     }
-    app.getContactHelper().initContactModification();
+    app.getContactHelper().initContactModification(before -1);
     app.getContactHelper().fillContactForm(new ContactData("Nick22", "Petrov12", "Nick55", null,  "Roga and Kopyta!", "Odessa, Ukraine", "+380487777777", "nick_test@mailinator.com"), false );
     app.getContactHelper().submitContactModification();
     app.getNavigationHelper().returnToHomePage();

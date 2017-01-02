@@ -1,12 +1,17 @@
 package com.qa.java.addressbook.appmanager;
 
 import com.qa.java.addressbook.model.ContactData;
+import com.qa.java.addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by user on 08.12.2016.
@@ -46,13 +51,12 @@ public class ContactHelper extends HelperBase {
     click(By.linkText("home page"));
   }
 
-  public void selectContact() {
-
-    click(By.name("selected[]"));
+  public void selectContact(int index) {
+    findElements(By.name("selected[]")).get(index).click();
   }
 
-  public void initContactModification() {
-    click(By.xpath("//img[@alt='Edit']"));
+  public void initContactModification(int index) {
+    findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
   }
 
   public void submitContactModification() {
@@ -72,7 +76,7 @@ public class ContactHelper extends HelperBase {
     initContactCreation();
     fillContactForm(contact, creation);
     submitContactCreation();
-    returnToHomePage();
+    //returnToHomePage();
   }
 
   public boolean isThereAContact() {
@@ -81,6 +85,17 @@ public class ContactHelper extends HelperBase {
 
   public int getContactCount() {
     return findElements(By.xpath("//img[@alt='Edit']")).size();
+  }
+
+  public List<ContactData> getContactList() {
+    List<ContactData> contacts = new ArrayList<ContactData>();
+    List<WebElement> elements = findElements(By.cssSelector("tr.entry"));
+    for (WebElement element : elements ){
+      String name = element.getText(); // Пробегаем по каждому элементу списка и получаем имя контакта
+      ContactData contact = new ContactData(name, null, null, null, null, null, null, null );
+      contacts.add(contact);
+    }
+    return contacts ;
   }
 }
 
