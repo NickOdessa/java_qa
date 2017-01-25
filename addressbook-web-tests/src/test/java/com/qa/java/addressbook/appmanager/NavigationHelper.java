@@ -27,8 +27,13 @@ public class NavigationHelper extends HelperBase {
             && isElementPresent(By.name("new"))) {
     return;
     }
-      click(By.linkText("groups"));
-  }
+      click(By.linkText("groups")); }
+
+
+    public void goToContactCreationPage()
+    {
+      click(By.linkText("add new"));
+    }
   public void changeActiveWindow(){
     switchWindow();
   }

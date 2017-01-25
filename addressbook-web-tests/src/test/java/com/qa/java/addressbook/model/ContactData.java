@@ -1,6 +1,7 @@
 package com.qa.java.addressbook.model;
 
 public class ContactData {
+  private int id;
   private final String firstname;
   private final String lastname;
   private final String nickname;
@@ -10,7 +11,8 @@ public class ContactData {
   private final String mobile;
   private final String email;
 
-  public ContactData(String firstname, String lastname, String nickname, String group, String company, String address, String mobile, String email) {
+  public ContactData(int id, String firstname, String lastname, String nickname, String group, String company, String address, String mobile, String email) {
+    this.id = id;
     this.firstname = firstname;
     this.lastname = lastname;
     this.nickname = nickname;
@@ -20,6 +22,24 @@ public class ContactData {
     this.mobile = mobile;
     this.email = email;
   }
+
+  public ContactData(String  firstname, String lastname, String nickname, String group, String company, String address, String mobile, String email) {
+    this.id = Integer.MAX_VALUE; //Integer.MAX_VALUE;
+    this.firstname = firstname;
+    this.lastname = lastname;
+    this.nickname = nickname;
+    this.group = group;
+    this.company = company;
+    this.address = address;
+    this.mobile = mobile;
+    this.email = email;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  public int getId() {return id;}
 
   public String getFirstname() {
     return firstname;
@@ -56,6 +76,7 @@ public class ContactData {
   @Override
   public String toString() {
     return "ContactData{" +
+            "id='" + id + '\'' +
             "firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
             ", nickname='" + nickname + '\'' +
@@ -74,6 +95,7 @@ public class ContactData {
 
     ContactData that = (ContactData) o;
 
+    if (id != that.id) return false;
     if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
     if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
     if (nickname != null ? !nickname.equals(that.nickname) : that.nickname != null) return false;
@@ -87,7 +109,8 @@ public class ContactData {
 
   @Override
   public int hashCode() {
-    int result = firstname != null ? firstname.hashCode() : 0;
+    int result = id;
+    result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
     result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
     result = 31 * result + (nickname != null ? nickname.hashCode() : 0);
     result = 31 * result + (group != null ? group.hashCode() : 0);
