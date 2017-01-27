@@ -1,11 +1,13 @@
 package com.qa.java.addressbook.tests;
 
 import com.qa.java.addressbook.model.ContactData;
-import org.testng.Assert;
+import com.qa.java.addressbook.model.Contacts;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Set;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 /**
  * Created by user on 11.12.2016.
@@ -29,7 +31,7 @@ public class ContactModificationTest extends TestBase {
 
   @Test
   public void testContactModification() {
-    Set<ContactData> before = app.contact().all();
+    Contacts before = app.contact().all();
     ContactData modifiedContact = before.iterator().next();
     ContactData contact = new ContactData()
             .withId(modifiedContact.getId())
@@ -42,10 +44,9 @@ public class ContactModificationTest extends TestBase {
             .withMobile("+380487777777")
             .withEmail("nick_test@mailinator.com");
     app.contact().modify(contact);
-    Set<ContactData> after = app.contact().all();
-    Assert.assertEquals(after.size(), before.size());
-    before.add(contact);
-    Assert.assertEquals(before,after);
+    app.goTo().returnToHomePage();
+    Contacts after = app.contact().all();
+    assertEquals(after.size(),before.size());
+    assertThat(after, equalTo(before.withOut(modifiedContact).withAdded(contact)));
   }
-
 }

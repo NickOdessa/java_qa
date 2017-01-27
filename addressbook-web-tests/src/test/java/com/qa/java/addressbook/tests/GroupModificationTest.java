@@ -1,13 +1,13 @@
 package com.qa.java.addressbook.tests;
 
 import com.qa.java.addressbook.model.GroupData;
-import org.testng.Assert;
+import com.qa.java.addressbook.model.Groups;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 /**
  * Created by user on 11.12.2016.
@@ -24,7 +24,7 @@ public class GroupModificationTest extends TestBase{
 
   @Test
   public void testGroupModification() {
-    Set<GroupData> before = app.group().all();
+    Groups before = app.group().all();
     GroupData modifiedGroup = before.iterator().next();
     GroupData group = new GroupData()
             .withId(modifiedGroup.getId())
@@ -32,12 +32,9 @@ public class GroupModificationTest extends TestBase{
             .withHeader("test3")
             .withFooter("test47");
     app.group().modify(group);
-    Set<GroupData> after = app.group().all();
-    Assert.assertEquals(after.size(),before.size());
-
-    before.remove(modifiedGroup);
-    before.add(group);
-    Assert.assertEquals(before,after);
+    Groups after = app.group().all();
+    assertEquals(after.size(),before.size());
+    assertThat(after, equalTo(before.withOut(modifiedGroup).withAdded(group)));
   }
 
 }
