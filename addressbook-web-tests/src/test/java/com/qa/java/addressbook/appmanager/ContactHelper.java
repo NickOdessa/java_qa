@@ -67,7 +67,7 @@ public class ContactHelper extends HelperBase {
 
   public void createContact(ContactData contact, boolean creation) {
     initContactCreation();
-    fillContactForm(contact, creation);
+    fillContactForm(contact, true);
     submitContactCreation();
     //returnToHomePage();
   }
@@ -97,7 +97,7 @@ public class ContactHelper extends HelperBase {
       String lastname = cells.get(1).getText();
       String firstname = cells.get(2).getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      ContactData contact = new ContactData(id, firstname, null, lastname, null, null, null, null, null);
+      ContactData contact = new ContactData(id, firstname, lastname, null, null, null, null, null, null);
       contacts.add(contact);
     }
     return contacts;

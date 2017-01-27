@@ -76,15 +76,9 @@ public class ContactData {
   @Override
   public String toString() {
     return "ContactData{" +
-            "id='" + id + '\'' +
-            "firstname='" + firstname + '\'' +
+            "id='" + id +
+            ", firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
-            ", nickname='" + nickname + '\'' +
-            ", group='" + group + '\'' +
-            ", company='" + company + '\'' +
-            ", address='" + address + '\'' +
-            ", mobile='" + mobile + '\'' +
-            ", email='" + email + '\'' +
             '}';
   }
 
@@ -97,27 +91,14 @@ public class ContactData {
 
     if (id != that.id) return false;
     if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
-    if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
-    if (nickname != null ? !nickname.equals(that.nickname) : that.nickname != null) return false;
-    if (group != null ? !group.equals(that.group) : that.group != null) return false;
-    if (company != null ? !company.equals(that.company) : that.company != null) return false;
-    if (address != null ? !address.equals(that.address) : that.address != null) return false;
-    if (mobile != null ? !mobile.equals(that.mobile) : that.mobile != null) return false;
-    return email != null ? email.equals(that.email) : that.email == null;
-
-  }
+    return lastname != null ? lastname.equals(that.lastname) : that.lastname == null ;
+    }
 
   @Override
   public int hashCode() {
     int result = id;
     result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
     result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
-    result = 31 * result + (nickname != null ? nickname.hashCode() : 0);
-    result = 31 * result + (group != null ? group.hashCode() : 0);
-    result = 31 * result + (company != null ? company.hashCode() : 0);
-    result = 31 * result + (address != null ? address.hashCode() : 0);
-    result = 31 * result + (mobile != null ? mobile.hashCode() : 0);
-    result = 31 * result + (email != null ? email.hashCode() : 0);
     return result;
   }
 }
