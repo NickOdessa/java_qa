@@ -8,7 +8,7 @@ import java.util.List;
  * Created by user on 08.12.2016.
  */
 public class HelperBase {
-  private WebDriver wd;
+  protected WebDriver wd;
 
   public HelperBase(WebDriver wd) {
     this.wd = wd;

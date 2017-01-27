@@ -1,23 +1,21 @@
 package com.qa.java.addressbook.tests;
 
 import com.qa.java.addressbook.model.ContactData;
-import com.qa.java.addressbook.model.GroupData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class ContactCreationTest extends TestBase {
 
-  @Test
+  @Test (enabled = false)
   public void testContactCreation() {
-    List<ContactData> before = app.getContactHelper().getContactList();
+    List<ContactData> before = app.contact().list();
     ContactData contact = new ContactData("Nick22", "Petrov1", "Nick12", "test23", "Own Company", "Odessa, Ukraine", "+380487777777", "nick_test@mailinator.com"); //"Nick22", "Petrov1", "Nick12", "test23", "Own Company", "Odessa, Ukraine", "+380487777777", "nick_test@mailinator.com"
-    app.getContactHelper().createContact(contact, true);
-    app.getNavigationHelper().returnToHomePage();
-    List<ContactData> after = app.getContactHelper().getContactList();
+    app.contact().create(contact, true);
+    app.goTo().returnToHomePage();
+    List<ContactData> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size() +1);
 
     before.add(contact);

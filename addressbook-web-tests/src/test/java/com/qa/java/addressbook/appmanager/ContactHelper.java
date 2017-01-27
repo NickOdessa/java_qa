@@ -1,12 +1,9 @@
 package com.qa.java.addressbook.appmanager;
 
 import com.qa.java.addressbook.model.ContactData;
-import com.qa.java.addressbook.model.GroupData;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
@@ -65,11 +62,26 @@ public class ContactHelper extends HelperBase {
     click(By.linkText("add new"));
   }
 
-  public void createContact(ContactData contact, boolean creation) {
+  public void create(ContactData contact, boolean creation) {
     initContactCreation();
     fillContactForm(contact, true);
     submitContactCreation();
     //returnToHomePage();
+  }
+
+  public void modify(int index, ContactData contact) {
+    initContactModification(index);
+    fillContactForm(contact, false );
+    submitContactModification();
+    //returnToHomePage();
+  }
+
+  public void deleteContact(int index) {
+    selectContact(index);
+    deleteSelectedContact();
+    wd.switchTo().alert().accept();
+   // app.goTo().changeActiveWindow();
+   // app.goTo().returnToHomePage();
   }
 
  /* public void submitContact() {
@@ -89,7 +101,7 @@ public class ContactHelper extends HelperBase {
   public int getContactCountEdit() {
     return findElements(By.xpath("//input[@src='icons/pencil.png']")).size();}
 
-  public List<ContactData> getContactList() {
+  public List<ContactData> list() {
     List<ContactData> contacts = new ArrayList<ContactData>();
     List<WebElement> elements = findElements(By.cssSelector("tr[name='entry']"));
     for (WebElement element : elements) {
