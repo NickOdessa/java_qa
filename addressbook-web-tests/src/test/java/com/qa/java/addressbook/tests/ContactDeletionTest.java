@@ -15,7 +15,14 @@ public class ContactDeletionTest extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     if (app.contact().list().size() == 0){ //проверяем есть ли контакт, если нет, то создаем его
-      app.contact().create(new ContactData("Nick22", "Petrov1", "Nick12", "test23", "Own Company", "Odessa, Ukraine", "+380487777777", "nick_test@mailinator.com"), true);
+      app.contact().create(new ContactData().withFirstname("Nick22")
+              .withLastname("Petrov1")
+              .withNickname("Nick12")
+              .withGroup("test23")
+              .withCompany("Own Company")
+              .withAddress("Odessa, Ukraine")
+              .withMobile("+380487777777")
+              .withEmail("nick_test@mailinator.com"), true);
     }
   }
   @Test (enabled = false)
