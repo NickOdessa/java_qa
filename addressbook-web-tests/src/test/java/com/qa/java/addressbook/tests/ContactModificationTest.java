@@ -24,7 +24,7 @@ public class ContactModificationTest extends TestBase {
               .withGroup("test23")
               .withCompany("Own Company")
               .withAddress("Odessa, Ukraine")
-              .withMobile("+380487777777")
+              .withMobilePhone("+380487777777")
               .withEmail("nick_test@mailinator.com"), true);
     }
   }
@@ -41,12 +41,12 @@ public class ContactModificationTest extends TestBase {
             .withGroup("test23")
             .withCompany("Own Company")
             .withAddress("Odessa, Ukraine")
-            .withMobile("+380487777777")
+            .withMobilePhone("+380487777777")
             .withEmail("nick_test@mailinator.com");
     app.contact().modify(contact);
     app.goTo().returnToHomePage();
+    assertThat(app.contact().getContactCount(), equalTo(before.size()));
     Contacts after = app.contact().all();
-    assertEquals(after.size(),before.size());
     assertThat(after, equalTo(before.withOut(modifiedContact).withAdded(contact)));
   }
 }

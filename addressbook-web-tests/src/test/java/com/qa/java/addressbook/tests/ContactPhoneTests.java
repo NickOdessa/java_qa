@@ -1,18 +1,17 @@
 package com.qa.java.addressbook.tests;
 
-import com.qa.java.addressbook.model.ContactData;
-import com.qa.java.addressbook.model.Contacts;
 import org.testng.annotations.BeforeMethod;
+import com.qa.java.addressbook.model.ContactData;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
 
 /**
- * Created by user on 11.12.2016.
+ * Created by user on 29.01.2017.
  */
-public class ContactDeletionTest extends TestBase {
+public class ContactPhoneTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -23,18 +22,24 @@ public class ContactDeletionTest extends TestBase {
               .withGroup("test23")
               .withCompany("Own Company")
               .withAddress("Odessa, Ukraine")
+              .withHomePhone("+380487777776")
               .withMobilePhone("+380487777777")
+              .withWorkPhone("+380487777778")
               .withEmail("nick_test@mailinator.com"), true);
     }
   }
   @Test
-  public void testContactDeletion(){
-    Contacts before = app.contact().all();
-    ContactData deletedContact = before.iterator().next();
-    app.contact().delete(deletedContact);
+  public void testContactPhones() {
     app.goTo().returnToHomePage();
-    assertThat(app.contact().getContactCount(), equalTo(before.size() -1));
-    Contacts after = app.contact().all();
-    assertThat(after, equalTo(before.withOut(deletedContact)));
+    ContactData contact = app.contact().all().iterator().next();
+    ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
+
+    assertThat(contact.getHomePhone(), equalTo(cleaned(contactInfoFromEditForm.getHomePhone())));
+    assertThat(contact.getMobilePhone(), equalTo(cleaned(contactInfoFromEditForm.getMobilePhone())));
+    assertThat(contact.getWorkPhone(), equalTo(cleaned(contactInfoFromEditForm.getWorkPhone())));
+  }
+
+  public String cleaned(String phone) {
+    return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
   }
 }

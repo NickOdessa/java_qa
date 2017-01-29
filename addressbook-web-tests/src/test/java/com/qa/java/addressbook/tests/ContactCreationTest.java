@@ -20,12 +20,15 @@ public class ContactCreationTest extends TestBase {
             .withGroup("test23")
             .withCompany("Own Company")
             .withAddress("Odessa, Ukraine")
-            .withMobile("+380487777777")
+            .withHomePhone("+380487777776")
+            .withMobilePhone("+380487777777")
+            .withWorkPhone("+380487777778")
             .withEmail("nick_test@mailinator.com");
     app.contact().create(contact, true);
     app.goTo().returnToHomePage();
+    assertThat(app.contact().getContactCount(), equalTo(before.size() + 1));
     Contacts after = app.contact().all();
-    assertThat(after.size(), equalTo(before.size() + 1));
+
     assertThat(after, equalTo(
             before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
 
