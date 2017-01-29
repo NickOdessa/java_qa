@@ -2,6 +2,7 @@ package com.qa.java.addressbook.appmanager;
 
 import org.openqa.selenium.*;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -37,6 +38,12 @@ public class HelperBase {
         findElement(locator).clear();
         findElement(locator).sendKeys(text);
       }
+    }
+  }
+
+  protected void attach(By locator, File file) {
+    if (file !=null) {
+        findElement(locator).sendKeys(file.getAbsolutePath()); //get.AbsolutePath() преобразовывает абсолютный путь в относительный
     }
   }
 
