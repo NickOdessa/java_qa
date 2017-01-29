@@ -23,20 +23,10 @@ public class ContactData {
     return this;
   }
 
-
-
-
-  public String getAllphones() {
-    return allphones;
-  }
-
   public ContactData withAllPhones(String allphones) {
     this.allphones = allphones;
     return this;
   }
-
-
-
 
 
   public int getId() {return id;}
@@ -136,6 +126,10 @@ public class ContactData {
 
   public String getWorkPhone() { return workphone; }
 
+  public String getAllphones() {
+    return allphones;
+  }
+
   public String getEmail() {
     return email;
   }
@@ -150,7 +144,7 @@ public class ContactData {
     return allEmails;
   }
 
-  public String getGroup() {
+  public String getGroup(){
     return group;
   }
 

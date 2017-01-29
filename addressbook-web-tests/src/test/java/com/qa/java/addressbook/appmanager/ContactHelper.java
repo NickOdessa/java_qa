@@ -27,8 +27,8 @@ public class ContactHelper extends HelperBase {
   public void fillContactForm(ContactData contactData, boolean creation) {
     type(By.name("firstname"), contactData.getFirstname());
     type(By.name("lastname"), contactData.getLastname());
-    type(By.name("nickname"), contactData.getNickname());
-    type(By.name("company"), contactData.getCompany());
+    //type(By.name("nickname"), contactData.getNickname());
+   // type(By.name("company"), contactData.getCompany());
     type(By.name("address"), contactData.getAddress());
     type(By.name("home"), contactData.getHomePhone());
     type(By.name("mobile"), contactData.getMobilePhone());
@@ -39,8 +39,11 @@ public class ContactHelper extends HelperBase {
 
 
     if (creation) {
-      new Select(findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-    } else {
+      if (contactData.getGroup() != null) {
+        new Select(findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+      }
+    }
+      else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
   }
@@ -79,6 +82,10 @@ public class ContactHelper extends HelperBase {
     //returnToHomePage();
   }
 
+  public void viewInfoById (int id){
+    wd.findElement(By.cssSelector(String.format("a[href='view.php?id=%s']", id))).click();
+    }
+
   public void initContactModificationById(int id) {
     wd.findElement(By.xpath(String.format("//a[@href='edit.php?id=%s']", id))).click();
    /* WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']",id)));
@@ -110,6 +117,13 @@ public class ContactHelper extends HelperBase {
             .withEmail(email)
             .withEmail2(email2)
             .withEmail3(email3);
+  }
+
+  public void viewDetails() {
+    wd.findElement(By.cssSelector("div[id='content']")).getText();
+  }
+  public WebElement find(By locator) {
+    return wd.findElement(locator);
   }
 
   public void deleteContact() {

@@ -23,7 +23,6 @@ public class ContactPhoneTests extends TestBase {
       app.contact().create(new ContactData().withFirstname("Nick22")
               .withLastname("Petrov1")
               .withNickname("Nick12")
-              .withGroup("test23")
               .withCompany("Own Company")
               .withAddress("Odessa, Ukraine")
               .withHomePhone("+380487777776")
