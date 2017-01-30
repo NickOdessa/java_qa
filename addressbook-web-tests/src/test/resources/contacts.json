@@ -1,0 +1,37 @@
+[
+  {
+    "firstname": "Firstname0",
+    "lastname": "Lastname0",
+    "address": "Address 0",
+    "mobilephone": "+380487777770",
+    "email": "nick_test0@mailinator.com"
+  },
+  {
+    "firstname": "Firstname1",
+    "lastname": "Lastname1",
+    "address": "Address 1",
+    "mobilephone": "+380487777771",
+    "email": "nick_test1@mailinator.com"
+  },
+  {
+    "firstname": "Firstname2",
+    "lastname": "Lastname2",
+    "address": "Address 2",
+    "mobilephone": "+380487777772",
+    "email": "nick_test2@mailinator.com"
+  },
+  {
+    "firstname": "Firstname3",
+    "lastname": "Lastname3",
+    "address": "Address 3",
+    "mobilephone": "+380487777773",
+    "email": "nick_test3@mailinator.com"
+  },
+  {
+    "firstname": "Firstname4",
+    "lastname": "Lastname4",
+    "address": "Address 4",
+    "mobilephone": "+380487777774",
+    "email": "nick_test4@mailinator.com"
+  }
+]
