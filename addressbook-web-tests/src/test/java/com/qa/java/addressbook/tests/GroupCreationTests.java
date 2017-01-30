@@ -1,5 +1,7 @@
 package com.qa.java.addressbook.tests;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.qa.java.addressbook.model.GroupData;
 import com.qa.java.addressbook.model.Groups;
 import com.thoughtworks.xstream.XStream;
@@ -20,13 +22,12 @@ import static org.testng.Assert.assertEquals;
 public class GroupCreationTests extends TestBase{
 
   @DataProvider  //Провайдер тестовых данных
-  public Iterator<Object[]> validGroups() throws IOException {
+  public Iterator<Object[]> validGroupsFromXml() throws IOException {
     BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/groups.xml"));
    String xml = "";
     String line = reader.readLine();
     while (line !=null){
       xml+=line;
-      String[] split= line.split(";");
       line = reader.readLine();
     }
     XStream xstream = new XStream();
@@ -35,7 +36,22 @@ public class GroupCreationTests extends TestBase{
     return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
   }
 
-  @Test(dataProvider = "validGroups")
+  @DataProvider  //Провайдер тестовых данных
+  public Iterator<Object[]> validGroupsFromJson() throws IOException {
+    BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/groups.json"));
+    String json = "";
+    String line = reader.readLine();
+    while (line !=null){
+      json+=line;
+      line = reader.readLine();
+    }
+
+    Gson gson = new Gson();
+    List<GroupData> groups = gson.fromJson(json, new TypeToken<List<GroupData>>(){}.getType());
+    return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
+  }
+
+  @Test(dataProvider = "validGroupsFromJson") //Указываем данные из файла какого формата брать (в данном случаем Json)
   public void testGroupCreation(GroupData group) {
       app.goTo().groupPage();
       Groups before = app.group().all();
