@@ -10,7 +10,8 @@ import org.testng.annotations.BeforeSuite;
  */
 public class TestBase {
 
-  protected static final ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
+  protected static final ApplicationManager app
+          = new ApplicationManager(System.getProperty("browser", BrowserType.CHROME)); // если в свойствах не указан броузер, то используется браузер по умолчанию из BrowserType
 
   @BeforeSuite
   public void setUp() throws Exception {
