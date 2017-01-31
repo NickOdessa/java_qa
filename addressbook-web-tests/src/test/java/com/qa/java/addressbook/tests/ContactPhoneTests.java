@@ -1,9 +1,7 @@
 package com.qa.java.addressbook.tests;
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader;
-import org.testng.annotations.BeforeMethod;
 import com.qa.java.addressbook.model.ContactData;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;

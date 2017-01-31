@@ -1,33 +1,5 @@
 [
   {
-    "firstname": "Petrov0",
-    "lastname": "Nick0",
-    "address": "Odessa, Ukraine",
-    "mobilephone": "+380487777770",
-    "email": "nick_test0@mailinator.com"
-  },
-  {
-    "firstname": "Petrov1",
-    "lastname": "Nick1",
-    "address": "Odessa, Ukraine",
-    "mobilephone": "+380487777771",
-    "email": "nick_test1@mailinator.com"
-  },
-  {
-    "firstname": "Petrov2",
-    "lastname": "Nick2",
-    "address": "Odessa, Ukraine",
-    "mobilephone": "+380487777772",
-    "email": "nick_test2@mailinator.com"
-  },
-  {
-    "firstname": "Petrov3",
-    "lastname": "Nick3",
-    "address": "Odessa, Ukraine",
-    "mobilephone": "+380487777773",
-    "email": "nick_test3@mailinator.com"
-  },
-  {
     "firstname": "Petrov4",
     "lastname": "Nick4",
     "address": "Odessa, Ukraine",

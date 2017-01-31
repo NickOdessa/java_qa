@@ -6,14 +6,12 @@ import com.beust.jcommander.ParameterException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.qa.java.addressbook.model.GroupData;
-import com.sun.xml.internal.bind.v2.runtime.output.SAXOutput;
 import com.thoughtworks.xstream.XStream;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.security.acl.Group;
 import java.util.ArrayList;
 import java.util.List;
 
