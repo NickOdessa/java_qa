@@ -36,6 +36,7 @@
 
         <!-- Names the annotated entity class -->
         <mapping class="com.qa.java.addressbook.model.GroupData"/>
+        <mapping class="com.qa.java.addressbook.model.ContactData"/>
 
     </session-factory>
 
