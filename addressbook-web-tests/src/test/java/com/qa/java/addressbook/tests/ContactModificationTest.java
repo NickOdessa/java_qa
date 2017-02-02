@@ -16,7 +16,7 @@ public class ContactModificationTest extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-    if (app.db().contacts().size() == 0){ //проверяем есть ли контакт, если нет, то создаем его
+    if (app.db().contacts().size() == 0) { //проверяем есть ли контакт, если нет, то создаем его
       app.contact().create(new ContactData()
               .withFirstname("Nick22")
               .withLastname("Petrov1")
@@ -48,5 +48,6 @@ public class ContactModificationTest extends TestBase {
     assertThat(app.contact().getContactCount(), equalTo(before.size()));
     Contacts after = app.db().contacts();
     assertThat(after, equalTo(before.withOut(modifiedContact).withAdded(contact)));
+    verifyContactListInUI();
   }
 }
