@@ -45,5 +45,17 @@ public Groups groups() {
     return new Contacts(result);
   }
 
+  public Groups getIdGroupsToContact(int id) {
+    Session session = sessionFactory.openSession();
+    session.beginTransaction();
+    List<ContactData> result = session.createQuery("from ContactData where id = " + id).list();
+    session.getTransaction().commit();
+    session.close();
+    Groups groups = new Groups();
+    for (ContactData contact : result) {
+      groups = contact.getGroups();
+    }
+    return groups;
+  }
 }
 

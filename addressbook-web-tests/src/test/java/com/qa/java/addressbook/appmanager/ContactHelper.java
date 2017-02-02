@@ -71,17 +71,44 @@ public class ContactHelper extends HelperBase {
     initContactCreation();
     fillContactForm(contact, true);
     submitContactCreation();
-    conactCache = null;
+    contactCache = null;
     //returnToHomePage();
   }
+
+  public void selectContact(ContactData selectedContact) {
+    selectAddContactToGroupById(selectedContact.getId());
+    selectGroupToAdd();
+    addContactToGroup();
+    contactCache = null;
+  }
+
 
   public void modify(ContactData contact) {
     initContactModificationById(contact.getId());
     fillContactForm(contact, false );
     submitContactModification();
-    conactCache = null;
+    contactCache = null;
     //returnToHomePage();
   }
+
+  public void deleteContactFromGroup(ContactData selectedContact) {
+    selectAddContactToGroupById(selectedContact.getId());
+    deleteAddedContactFromGroup();
+    contactCache = null;
+  }
+
+  private void deleteAddedContactFromGroup() {
+    click(By.xpath("//input[@type='submit']"));
+  }
+
+  public void selectContactAdded1(){
+    click(By.xpath("//form[@id='right']/select/option[3]"));
+  }
+
+  public void selectContactAdded2(){
+    click(By.xpath("//form[@id='right']/select/option[4]"));
+  }
+
 
   public void viewInfoById (int id){
     wd.findElement(By.cssSelector(String.format("a[href='view.php?id=%s']", id))).click();
@@ -93,6 +120,18 @@ public class ContactHelper extends HelperBase {
     WebElement row = checkbox.findElement(By.xpath("./../..")); //Находим нужную строку
     List<WebElement> cells = row.findElements(By.tagName("td"));
     cells.get(7).findElement(By.tagName("a")).click();*/ //находим нужную ячейку с символом редактирования
+  }
+
+  public void selectGroupToAdd(){
+    click(By.xpath("//div[@class='right']/select/option[1]"));
+  }
+
+  public void selectAddContactToGroupById(int id) {
+    wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+  }
+
+  public void addContactToGroup() {
+    click(By.name("add"));
   }
 
   public ContactData infoFromEditForm(ContactData contact) {
@@ -130,7 +169,7 @@ public class ContactHelper extends HelperBase {
   public void deleteContact() {
     click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
     wd.switchTo().alert().accept();
-    conactCache = null;
+    contactCache = null;
     // app.goTo().changeActiveWindow();
     // app.goTo().returnToHomePage();
   }
@@ -153,14 +192,14 @@ public class ContactHelper extends HelperBase {
     return findElements(By.xpath("//input[@name='selected[]']")).size();
   }
 
-  private Contacts conactCache = null;
+  private Contacts contactCache = null;
 
   public Contacts all() {
-    if (conactCache!=null) {
-      return new Contacts(conactCache);
+    if (contactCache !=null) {
+      return new Contacts(contactCache);
     }
 
-    conactCache = new Contacts();
+    contactCache = new Contacts();
     List<WebElement> elements = findElements(By.cssSelector("tr[name='entry']"));
     for (WebElement element : elements) {
       List<WebElement> cells = element.findElements(By.tagName("td"));
@@ -170,7 +209,7 @@ public class ContactHelper extends HelperBase {
       String allEmails = cells.get(4).getText();
       String allPhones = cells.get(5).getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      conactCache.add(new ContactData()
+      contactCache.add(new ContactData()
               .withId(id)
               .withFirstname(firstname)
               .withLastname(lastname)
@@ -178,7 +217,7 @@ public class ContactHelper extends HelperBase {
               .withAllEmails(allEmails)
               .withAllPhones(allPhones));
     }
-    return new Contacts(conactCache);
+    return new Contacts(contactCache);
   }
 
 }
