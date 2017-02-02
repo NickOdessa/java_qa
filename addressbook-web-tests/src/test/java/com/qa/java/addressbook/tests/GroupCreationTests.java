@@ -22,6 +22,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertEquals;
 
 
+
+
 public class GroupCreationTests extends TestBase{
 
 
@@ -62,10 +64,10 @@ public class GroupCreationTests extends TestBase{
   @Test(dataProvider = "validGroupsFromJson") //Указываем данные из файла какого формата брать (в данном случаем Json)
   public void testGroupCreation(GroupData group) {
       app.goTo().groupPage();
-      Groups before = app.group().all();
+      Groups before = app.db().groups();
       app.group().create(group);
       assertThat(app.group().count(), equalTo(before.size() + 1));
-      Groups after = app.group().all();
+      Groups after = app.db().groups();
 
       assertThat(after, equalTo(
               before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
@@ -74,10 +76,10 @@ public class GroupCreationTests extends TestBase{
   @Test (enabled = false)
   public void testBadGroupCreation() {
     app.goTo().groupPage();
-    Groups before = app.group().all();
+    Groups before = app.db().groups();
     GroupData group = new GroupData().withName("test253'");
     app.group().create(group);
-    Groups after = app.group().all();
+    Groups after = app.db().groups();
 
     assertThat(after.size(), equalTo(before.size()));
     assertThat(after, equalTo(before));
