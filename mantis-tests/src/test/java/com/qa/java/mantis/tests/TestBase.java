@@ -2,6 +2,7 @@ package com.qa.java.mantis.tests;
 
 import com.qa.java.mantis.appmanager.ApplicationManager;
 import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.HttpSessionId;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
