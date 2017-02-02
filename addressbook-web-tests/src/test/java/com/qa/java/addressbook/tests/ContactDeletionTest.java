@@ -5,6 +5,8 @@ import com.qa.java.addressbook.model.Contacts;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.io.File;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertEquals;
@@ -20,11 +22,12 @@ public class ContactDeletionTest extends TestBase {
       app.contact().create(new ContactData().withFirstname("Nick22")
               .withLastname("Petrov1")
               .withNickname("Nick12")
-              .withGroup("test23")
+              //.withGroup("test23")
               .withCompany("Own Company")
               .withAddress("Odessa, Ukraine")
               .withMobilePhone("+380487777777")
-              .withEmail("nick_test@mailinator.com"), true);
+              .withEmail("nick_test@mailinator.com")
+              .withPhoto(new File("src/test/resources/min.jpg")), true);
     }
   }
   @Test
