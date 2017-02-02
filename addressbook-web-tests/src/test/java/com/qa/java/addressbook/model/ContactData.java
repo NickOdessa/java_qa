@@ -49,22 +49,16 @@ public class ContactData {
   private String email3;
   @Transient
   private String allEmails;
+  @Expose
+  @Transient
   @Column (name = "photo")
   @Type(type = "text")
   private String photo;
-
-
-
-
 
   public ContactData withPhoto(File photo) {
     this.photo = photo.getPath();
     return this;
   }
-
-
-
-
 
   public ContactData withAllEmails(String allEmails) {
     this.allEmails = allEmails;
